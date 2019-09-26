@@ -18,4 +18,4 @@ Route::get('/{tenNguoiDung?}', function ($tenNguoiDung ='') {
     return view('welcome');
 });
 
-// Route::view('welcome');
+Route::view('welcome');
