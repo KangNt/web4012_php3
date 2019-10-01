@@ -11,18 +11,27 @@
 |
 */
 use App\Models\User;
+use App\Models\Post;
 
-Route::get('welcome', function () {
+Route::get('/', function () {
     return view('welcome');
 
 });
-
- Route::get('route-starter',function(){
+/**starter */
+ Route::get('starter',function(){
      $users = factory(User::class,10)
      ->make()
      ->toArray();
-     
      return view('starter', [
         'users' => $users
     ]);
  });
+/**post */
+ Route::get('post',function(){
+    $posts = factory(Post::class,10)
+    ->make()
+    ->toArray();
+    return view('post', [
+       'posts' => $posts
+   ]);
+});

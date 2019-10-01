@@ -57,8 +57,8 @@ desired effect
 <div class="wrapper">
   @include('header')
   @include('sidebar')
-    @yield('contents')
-    @include('footer')
+  @yield('contents')
+  @include('footer')
 
   <!-- Add the sidebar's background. This div must be placed
   immediately after the control sidebar -->
