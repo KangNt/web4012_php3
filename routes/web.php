@@ -10,12 +10,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Models\User;
 
-use Illuminate\Routing\Route;
-
-Route::get('/{tenNguoiDung?}', function ($tenNguoiDung ='') {
-    dd($tenNguoiDung);
+Route::get('welcome', function () {
     return view('welcome');
+
 });
 
-// Route::view('welcome');
+ Route::get('route-starter',function(){
+     $users = factory(User::class,10)
+     ->make()
+     ->toArray();
+     
+     return view('starter', [
+        'users' => $users
+    ]);
+ });
