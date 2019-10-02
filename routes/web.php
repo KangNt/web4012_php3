@@ -35,3 +35,13 @@ Route::get('/', function () {
        'posts' => $posts
    ]);
 });
+
+/** create */
+Route::get('users/create',function(){
+//     $posts = factory(Post::class,10)
+//     ->make()
+//     ->toArray();
+//     return view('post', [
+//        'posts' => $posts
+//    ]);
+});
