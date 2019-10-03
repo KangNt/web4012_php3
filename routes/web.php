@@ -22,26 +22,24 @@ Route::get('/', function () {
      $users = factory(User::class,10)
      ->make()
      ->toArray();
-     return view('starter', [
-        'users' => $users
-    ]);
+     return view('starter', ['users' => $users]);
  });
 /**post */
  Route::get('post',function(){
     $posts = factory(Post::class,10)
     ->make()
     ->toArray();
-    return view('post', [
-       'posts' => $posts
-   ]);
+    return view('post', ['posts' => $posts]);
 });
 
 /** create */
-Route::get('users/create',function(){
-//     $posts = factory(Post::class,10)
-//     ->make()
-//     ->toArray();
-//     return view('post', [
-//        'posts' => $posts
-//    ]);
+Route::get('users/create',function(Faker $faker){
+$user = User::create([
+    'name' => 'Nothing',
+    'birthday'=>$faker->date(),
+    'email' => $faker->unique()->safeEmail,
+    'password' =>'123456'->bcrypt(),
+    
+]);
+
 });
