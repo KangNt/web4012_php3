@@ -19,16 +19,14 @@ Route::get('/', function () {
     return view('welcome');
 
 });
+
 /**starter */
  Route::get('users',function(){
-    //  $users = factory(User::class,10)
-    //  ->make()
-    //  ->toArray();
     $users = User::all()->toArray();
      return view('starter', ['users' => $users]);
  })->name('users.index');
 
-// /**post */
+/**post */
 //  Route::get('post',function(){
 //     $posts = factory(Post::class,10)
 //     ->make()
@@ -36,15 +34,17 @@ Route::get('/', function () {
 //     return view('post', ['posts' => $posts]);
 // });
   
-/** create*/
-
+/** view-create*/
 Route::view('users/create','users/create')->name('users.create');
+/**view-update */
+Route::view('users/update','users/update')->name('users.update');
 
-/** store */
+
+
+/** create-store */
 Route::post('users/store',function(Request $request){
   //dd($request->all());
   $data = $request->all();
-
     $user = User::create([
         'name' =>$data['name'],
         'email' => $data['email'],
@@ -55,6 +55,11 @@ Route::post('users/store',function(Request $request){
     return redirect()->route('users.index');
 
 })->name('users.store');
+/**----------------------------------------------------------------------- */
+
+
+
+
 
 /**read */
 Route::get('users/{id}', function ($id) {
@@ -62,30 +67,38 @@ Route::get('users/{id}', function ($id) {
 })->name('users.show');
 
 
-
+/**---------------------------------------------------------------------------------------*/
 /**Update */
-Route::get('users/update/{id}', function( $id){
-    //....
+
+Route::post('users/update/{id}', function($id){
     $user = User::find($id);
-    $user->name ='QuangNt99';
-    $user->email= 'oda.mante@example.com';
-    $user->save();
-   
     $user->update([
-        'name'=>'Noooooo',
-        'email'=>"kangnguyen260399@gmail.com",
+        'name' => 'NTQ',
     ]);
-        return redirect()->route('users.index');
+    return redirect()->route('users.index');
 });
+
+/**----------------------------------------------------------------------------------------- */
+
 
 /**delete */
 Route::get('users/delete/{id}', function($id){
-    //....
+    
     $user = User::find($id);
     $user->delete();
-
+    
         return redirect()->route('users.index');
-});
+})->name('users.delete');
 
 
+/**-------------------------------------------------- */
+Route::get('post', function () {
+        $posts = \App\Models\Post::all();
+        foreach ($posts as $key => $post) {
+            $post->user;
+        }
+        return view('post', [
+                    'posts' => $posts->toArray()
+                ]);
+    });
 

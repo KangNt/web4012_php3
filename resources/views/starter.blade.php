@@ -1,6 +1,6 @@
 @extends('layouts')
 
-@section('title', 'User')
+@section('title', 'Users')
 
 @section('contents')
 <!-- Code -->
@@ -27,7 +27,8 @@
 
     </section>
     <!-- /.content -->
-    <a href="{{route ('users.create')}}" class="btn btn-success"> Create</a>
+    
+    <a href="{{ route('users.create') }}" class="btn btn-success">Create</a>
 
     @if(empty($users))
         <p>No Data</p>
@@ -37,7 +38,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Birthday</th>
-                
+                <th>Posts</th>
             </thead>
             <tbody>
                 @foreach($users as $user)
@@ -45,6 +46,7 @@
                         <td>{{ $user['name'] }}</td>
                         <td>{{ $user['email'] }}</td>
                         <td>{{ $user['birthday'] }}</td>
+                        <td>{{ count($user['posts']) }}</td>
                         <td><a href="#" class="btn btn-primary">Update</a></td>
                         <td><a href="#" class="btn btn-danger">Delete</a></td>
                     </tr>

@@ -27,10 +27,11 @@
 
     </section>
     <!-- /.content -->
-
+    <a href="#" class="btn btn-success"> Create</a>
     @if(empty($posts))
         <p>No Data</p>
     @else
+    
         <table class="table">
             <thead>
                 <th>user_id</th>
