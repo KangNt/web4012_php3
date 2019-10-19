@@ -28,27 +28,34 @@
     </section>
     <!-- /.content -->
     
+    
+    <h3 style="text-align: center">USERS</h3>
     <a href="{{ route('users.create') }}" class="btn btn-success">Create</a>
-
     @if(empty($users))
         <p>No Data</p>
     @else
         <table class="table">
             <thead>
+              
                 <th>Name</th>
                 <th>Email</th>
                 <th>Birthday</th>
-                <th>Posts</th>
+                <th> Address </th>
             </thead>
             <tbody>
                 @foreach($users as $user)
-                    <tr>
+                    <tr>  
+                      
                         <td>{{ $user['name'] }}</td>
                         <td>{{ $user['email'] }}</td>
                         <td>{{ $user['birthday'] }}</td>
-                        <td>{{ count($user['posts']) }}</td>
-                        <td><a href="#" class="btn btn-primary">Update</a></td>
-                        <td><a href="#" class="btn btn-danger">Delete</a></td>
+                        <td>{{ $user['address'] }}</td>
+                        
+                        <td><a href="{{ url('users/update',[ $user['id'] ]) }}" class="btn btn-primary">Update</a></td>
+                        <td><input type="submit" value="Delete" class="btn btn-danger"></td>
+                        <form action="{{ route('users.delete',[$user['id']] ) }}" method="POST">
+                           @csrf
+                      <input type="hidden" value="{{  $user['id'] }}">
                     </tr>
                 @endforeach
             </tbody>

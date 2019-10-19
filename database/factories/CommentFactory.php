@@ -2,14 +2,14 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\Post;
+use App\Models\Comment;
 use Faker\Generator as Faker;
 
-$factory->define(Post::class, function (Faker $faker) {
+$factory->define(Comment::class, function (Faker $faker) {
     return [
-        'title'=>$faker->name,
+        'post_id'=>$faker->randomDigit,
         'content'=>$faker->realText,
-        'category_id'=>$faker->randomDigit,
         'user_id'=>$faker->randomDigit,
+        'is_active'=>$faker->randomDigit,
     ];
 });

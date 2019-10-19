@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Post;
 class UserController extends Controller
 {
     /**
@@ -11,11 +12,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all()->with('posts')->get();
-    
-        return view('starter', [
-            'users' => $users->toArray(),
-        ]);
+        $users = User::all();
+        foreach ($users as $user) {
+            $user->posts;
+        }
+        $users->toArray();
+        return view('admin.users.index', ['users' => $users]);
     }
     /**
      * Show the form for creating a new resource.
@@ -24,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users/create');
+        return view('admin.users.create');
     }
     /**
      * Store a newly created resource in storage.
@@ -37,8 +39,11 @@ class UserController extends Controller
         $data = $request->all();
         $user = User::create([
             'name' => $data['name'],
+            'phone'=>$data['phone'],
             'email' => $data['email'],
             'birthday' => $data['birthday'],
+            'role'=>$data['role'],
+            'is_active'=>$data['is_active'],
             'password' => bcrypt('123456'),
         ]);
     
@@ -54,6 +59,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         return $user;
+        // return view('admin.users.show', ['user' => User::findOrFail($id)]);
     }
     /**
      * Show the form for editing the specified resource.
@@ -63,10 +69,14 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        // $user=User::find($id);
+        // return view ('users.edit',['user'=>$user->toArray()]);
+
         $user = User::find($id);
-        return view('users/create', [
+        return view('admin.users.edit', [
             'user' => $user,
         ]);
+
     }
     /**
      * Update the specified resource in storage.
@@ -82,10 +92,16 @@ class UserController extends Controller
     
         $user->update([
             'name' => $data['name'],
+            'birthday'=>$data['birthday'],
+            'phone' => $data['phone'],
             'email' => $data['email'],
+            'password' =>$data['password'],
+            'role' =>$data['role'],
+            'is_active' =>$data['is_active'],
         ]);
     
         return redirect()->route('users.index');
+
     }
     /**
      * Remove the specified resource from storage.
@@ -95,9 +111,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
-    
+        User::destroy($id);
         return redirect()->route('users.index');
     }
 }
