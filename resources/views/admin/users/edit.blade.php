@@ -1,6 +1,7 @@
 @extends('users')
 @section('title' , 'Edit')
 @section('contents')
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -13,40 +14,45 @@
     <!-- Main content -->
     <section class="content container-fluid">
       
-        <form action="{{ route('users.update')}}" method="POST">
+        <form action="{{ route('users.update','$user->id')}}" method="POST">
             @csrf
             <div class="form-group">
-                <label>name</label>
-                <input type="hidden" value="{{ $user ['id'] }}" name="id">
-                <input type="text" class="form-control"  name="name" value="{{ $user ['name'] }}">
+                <label>ID</label>
+                <input type="hidden" value="{{ $user->id}}" name="id">
+                <input type="text" class="form-control"  name="id" value="{{ $user->id }}">
             </div>
             <div class="form-group">
-                <label>birthday</label>
-                <input type="text" class="form-control" name="birthday" value="{{ $user ['birthday'] }}">
+                <label>Name</label>
+                <input type="text" class="form-control"  name="name" value="{{ $user->name }}">
             </div>
             <div class="form-group">
-                <label>phone</label>
-                <input type="text" class="form-control" name="phone" value="{{ $user ['phone'] }}">
+                <label>Birthday</label>
+                <input type="text" class="form-control" name="birthday" value="{{ $user->birthday }}">
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="phone" class="form-control" name="phone" value="{{ $user->phone }}">
             </div>
 
             <div class="form-group">
-                <label>email</label>
-                <input type="text" class="form-control" name="email" value="{{ $user ['email'] }}">
+                <label>Email</label>
+                <input type="email" class="form-control" name="email" value="{{ $user->email }}">
             </div>
             <div class="form-group">
                 <label >Password</label>
-                <input type="text" class="form-control" name="password" value="{{ $user ['password'] }}">
+                <input type="password" class="form-control" name="password" value="{{ $user->password}}">
             </div>
             <div class="form-group">
                 <label >Role</label>
-                <input type="text" class="form-control" name="role" value="{{ $user ['role'] }}">
+                <input type="text" class="form-control" name="role" value="{{ $user->role}}">
             </div>
             <div class="form-group">
                 <label >Is_active</label>
-                <input type="text" class="form-control" name="is_active" value="{{ $user ['is_active'] }}">
+                <input type="text" class="form-control" name="is_active" value="{{ $user->is_active}}">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+       
     </section>
 </div>
 @endsection

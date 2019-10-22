@@ -20,7 +20,7 @@ class CreateUsers extends Migration
             $table->integer('phone');
             $table->string('email');
             $table->string('password');
-            $table->enum('role', ['1', '2']);
+            $table->integer('role')->default(config('role.member'));
             $table->boolean('is_active');
             $table->timestamps();
         });

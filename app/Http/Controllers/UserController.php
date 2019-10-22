@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
+use Illuminate\Support\Facades\Hash;
+
 class UserController extends Controller
 {
     /**
@@ -46,6 +48,7 @@ class UserController extends Controller
             'is_active'=>$data['is_active'],
             'password' => bcrypt('123456'),
         ]);
+     
     
         return redirect()->route('users.index');
     }
@@ -88,19 +91,22 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        $data = $request->all();
-    
+        // $data = $request->all();
+
         $user->update([
-            'name' => $data['name'],
-            'birthday'=>$data['birthday'],
-            'phone' => $data['phone'],
-            'email' => $data['email'],
-            'password' =>$data['password'],
-            'role' =>$data['role'],
-            'is_active' =>$data['is_active'],
+            'name' => $request->name,
+            'birthday' => $request->birthday,
+            'email' => $request->email,
+            'phone' =>$request->phone,
+            'role' => $request->role,
         ]);
     
-        return redirect()->route('users.index');
+        return redirect()->route('admin.users.index');
+
+
+        // $user = User::where('id', '=', $id)->first();
+
+        // $user->update($request->all());
 
     }
     /**

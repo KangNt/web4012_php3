@@ -23,14 +23,16 @@ Route::get('/','HomeController@index')->name('admin');
 Route::group([
     'prefix'=>'users',
     'as'=>'users.',
+    'middleware'=> 'check_admin_role',
 ],function(){
     Route::get('/','UserController@index')->name('index');// hiển thị tất cả tài nguyên
     Route::get('/create','UserController@create')->name('create');//tạo mới
     Route::post('/store','UserController@store')->name('store');//lưu trữ một tài nguyên mới
     Route::get('/edit/{id}','UserController@edit')->name('edit');// sửa một tài nguyên theo tham số truyền vào
-    Route::post('/update','UserController@update')->name('update');//cập nhật 1 tài nguyên theo tham số truyền vào
+    Route::post('/update/{id}','UserController@update')->name('update');//cập nhật 1 tài nguyên theo tham số truyền vào
     Route::get('/show','UserController@show')->name('show');
     Route::post('/destroy/{id}','UserController@destroy')->name('destroy');//xóa 1 tài nguyên
+    
 });
 
 Route::get('login', 'AuthController@getLoginForm')->name('auth.login_form');

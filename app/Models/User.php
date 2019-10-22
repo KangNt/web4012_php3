@@ -51,14 +51,16 @@ class User extends Authenticatable
     }
 
 
-    public function getNameAttribute($value)
-    {
-        return strtoupper($value);
-    }
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = bcrypt($value);
-    }
+    // public function getNameAttribute($value)
+    // {
+    //     return strtoupper($value);
+    // }
+
+
+    // public function setPasswordAttribute($value)
+    // {
+    //      $this->attributes['password'] = bcrypt($value);
+    // }
 
 
 

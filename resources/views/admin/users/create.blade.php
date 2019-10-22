@@ -7,6 +7,10 @@
         <form action="{{ route('users.store') }}" method="POST" role="form">
         <legend>Create Users</legend>
         {{ csrf_field()}}
+        <!-- <div class="form-group">
+            <label for="">ID</label>
+            <input type="hiden" name="id" class="form-control" id="" placeholder="Input field">
+        </div> -->
         <div class="form-group">
             <label for="">Name</label>
             <input type="text" name="name" class="form-control" id="" placeholder="Input field">
@@ -14,6 +18,10 @@
         <div class="form-group">
             <label for="">Email</label>
             <input type="email" name="email" class="form-control" id="" placeholder="Input field">
+        </div>
+        <div class="form-group">
+            <label for="">Password</label>
+            <input type="password" name="password" class="form-control" id="" placeholder="Input field">
         </div>
         <div class="form-group">
             <label for="">Birthday</label>
